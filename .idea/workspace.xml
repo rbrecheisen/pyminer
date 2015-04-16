@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89df8457-a4f7-4d22-9425-2e5ded959024" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pyminer/ui/Application.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pyminer/pyminer.py" afterPath="$PROJECT_DIR$/pyminer/Bla.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyminer/ui/ApplicationWindow.py" afterPath="$PROJECT_DIR$/pyminer/ui/ApplicationWindow.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pyminer.iml" afterPath="$PROJECT_DIR$/.idea/pyminer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/pyminer/Bla.py" afterPath="$PROJECT_DIR$/pyminer/PyMiner.py" />
     </list>
     <ignored path="pyminer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +26,8 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Bla.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pyminer/Bla.py">
+      <file leaf-file-name="PyMiner.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pyminer/PyMiner.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.4509018" vertical-offset="0" max-vertical-offset="570">
               <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
@@ -404,7 +400,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pyminer/Bla.py">
+    <entry file="file://$PROJECT_DIR$/pyminer/PyMiner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -414,7 +410,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyminer/Bla.py">
+    <entry file="file://$PROJECT_DIR$/pyminer/PyMiner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -513,7 +509,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pyminer/Bla.py">
+    <entry file="file://$PROJECT_DIR$/pyminer/PyMiner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4509018" vertical-offset="0" max-vertical-offset="570">
           <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
