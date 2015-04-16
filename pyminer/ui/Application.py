@@ -1,8 +1,8 @@
 __author__ = 'Ralph'
 
-from ApplicationWindow import ApplicationWindow
-
 import wx
+
+from ApplicationWindow import ApplicationWindow
 
 
 class Application(wx.App):
@@ -21,4 +21,6 @@ class Application(wx.App):
         :return:
         """
         self._window.Show()
+        self._window.Maximize(True)
+
         self.MainLoop()

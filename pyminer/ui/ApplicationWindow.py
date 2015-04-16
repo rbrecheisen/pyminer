@@ -2,6 +2,8 @@ __author__ = 'Ralph'
 
 import wx
 
+from NodeCanvas import NodeCanvas
+
 
 class ApplicationWindow(wx.Frame):
 
@@ -12,3 +14,4 @@ class ApplicationWindow(wx.Frame):
         :return:
         """
         super(ApplicationWindow, self).__init__(None, -1, title)
+        self._canvas = NodeCanvas(self)
