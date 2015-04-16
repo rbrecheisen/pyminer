@@ -3,8 +3,9 @@ __author__ = 'Ralph'
 from network.ImportNode import ImportNode
 from network.ExportNode import ExportNode
 from network.ToUpperCaseNode import ToUpperCaseNode
-
 from network.Connection import Connection
+
+from ui.ApplicationWindow import ApplicationWindow
 
 
 if __name__ == '__main__':
