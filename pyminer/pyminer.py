@@ -7,6 +7,8 @@ from network.Connection import Connection
 
 from ui.ApplicationWindow import ApplicationWindow
 
+import wx
+
 
 if __name__ == '__main__':
 
@@ -26,3 +28,8 @@ if __name__ == '__main__':
     # Execute network
 
     node1.execute()
+
+    app = wx.App()
+    frame = wx.Frame(None, -1, 'simple.py')
+    frame.Show()
+    app.MainLoop()
