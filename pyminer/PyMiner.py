@@ -5,9 +5,7 @@ from network.ExportNode import ExportNode
 from network.ToUpperCaseNode import ToUpperCaseNode
 from network.Connection import Connection
 
-from ui.ApplicationWindow import ApplicationWindow
-
-import wx
+from ui.Application import Application
 
 
 if __name__ == '__main__':
@@ -29,7 +27,7 @@ if __name__ == '__main__':
 
     node1.execute()
 
-    app = wx.App()
-    frame = wx.Frame(None, -1, 'simple.py')
-    frame.Show()
-    app.MainLoop()
+    # Run application
+
+    application = Application()
+    application.run()
