@@ -21,6 +21,6 @@ class Application(wx.App):
         :return:
         """
         self._window.Show()
-        self._window.Maximize(True)
+        self._window.SetSize((500, 500))
 
         self.MainLoop()
