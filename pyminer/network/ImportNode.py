@@ -11,7 +11,7 @@ class ImportNode(Node):
         Constructor of this import node.
         :return:
         """
-        super(ImportNode, self).__init__()
+        super(ImportNode, self).__init__('Import')
         self.add_output_port(OutputPort(name='output', data_type=str))
 
     def execute(self):

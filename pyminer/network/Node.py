@@ -2,17 +2,36 @@ __author__ = 'Ralph'
 
 from InputPort import InputPort
 from OutputPort import OutputPort
+from Configuration import Configuration
 
 
 class Node(object):
 
-    def __init__(self):
+    def __init__(self, name):
         """
         Constructor of this node.
+        :param name: Name of this node
         :return:
         """
+        self._name = name
         self._input_ports = dict()
         self._output_ports = dict()
+        self._configuration = Configuration()
+
+    def get_name(self):
+        """
+        Returns name of this node
+        :return: Name
+        """
+        return self._name
+
+    def set_name(self, name):
+        """
+        Sets name of this node
+        :param name: Name
+        :return:
+        """
+        self._name = name
 
     def add_input_port(self, port):
         """
@@ -53,6 +72,13 @@ class Node(object):
         :return: Output port
         """
         return self._output_ports[name]
+
+    def get_config(self):
+        """
+        Returns configuration of this node.
+        :return: Configuration
+        """
+        return self._configuration
 
     def execute(self):
         """

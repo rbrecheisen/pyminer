@@ -1,8 +1,8 @@
 __author__ = 'Ralph'
 
-from network.ImportNode import ImportNode
-from network.ExportNode import ExportNode
-from network.ToUpperCaseNode import ToUpperCaseNode
+from network.ImportCsvNode import ImportCsvNode
+from network.FilterExamplesNode import FilterExamplesNode
+from network.ExportCsvNode import ExportCsvNode
 from network.Connection import Connection
 
 from ui.Application import Application
@@ -10,11 +10,16 @@ from ui.Application import Application
 
 if __name__ == '__main__':
 
-    # Setup nodes
+    # Create nodes
 
-    node1 = ImportNode()
-    node2 = ToUpperCaseNode()
-    node3 = ExportNode()
+    node1 = ImportCsvNode()
+    node2 = FilterExamplesNode()
+    node3 = ExportCsvNode()
+
+    # Configure nodes
+
+    node1.get_config().add('file_name', 'file.csv')
+    node3.get_config().add('file_name', 'file_new.csv')
 
     # Setup connections
 
@@ -29,5 +34,5 @@ if __name__ == '__main__':
 
     # Run application
 
-    application = Application()
-    application.run()
+    # application = Application()
+    # application.run()

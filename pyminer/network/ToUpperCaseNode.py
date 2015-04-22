@@ -12,7 +12,7 @@ class ToUpperCaseNode(Node):
         Constuctor of this node.
         :return:
         """
-        super(ToUpperCaseNode, self).__init__()
+        super(ToUpperCaseNode, self).__init__('ToUpperCase')
 
         self.add_input_port(
             InputPort(name='input', data_type=str))
