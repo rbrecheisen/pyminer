@@ -2,6 +2,7 @@ __author__ = 'Ralph'
 
 from network.ImportCSVNode import ImportCSVNode
 from network.FilterExamplesNode import FilterExamplesNode
+from network.FilterAttributesNode import FilterAttributesNode
 from network.ExportCSVNode import ExportCSVNode
 from network.Connection import Connection
 
@@ -17,12 +18,17 @@ if __name__ == '__main__':
     # Create nodes
 
     node1 = ImportCSVNode()
-    node2 = FilterExamplesNode()
+    node2 = FilterAttributesNode()
     node3 = ExportCSVNode()
 
     # Configure nodes
 
     node1.get_config().add('file_name', get_data_root() + 'file.csv')
+
+    node2.get_config().add('filter_type', 'subset')
+    node2.get_config().add('filter_type.subset', 'id,name')
+    node2.get_config().add('invert_filter', False)
+
     node3.get_config().add('file_name', get_data_root() + 'file_new.csv')
 
     # Setup connections

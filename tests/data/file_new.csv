@@ -1,3 +1,3 @@
-,id, name, address, phone, email
-0,1, brecheisen, bellomontedomein 40 maastricht, 06-46230127, ralph.brecheisen@gmail.com
-1,2, coolsen, bellomontedomein 40 maastricht, 06-46222781, marielle_coolsen@hotmail.com
+ address, phone, email
+ bellomontedomein 40 maastricht, 06-46230127, ralph.brecheisen@gmail.com
+ bellomontedomein 40 maastricht, 06-46222781, marielle_coolsen@hotmail.com

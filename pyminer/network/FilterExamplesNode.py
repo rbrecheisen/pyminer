@@ -23,8 +23,8 @@ class FilterExamplesNode(Node):
 
     def execute(self):
         """
-        Executes this node.
+        Executes this node. For now, it just passes the data set
+        to the output port unchanged.
         :return:
         """
-        data = self.get_input_port('input').get_data()
-        self.get_output_port('output').set_data(data)
+        self.get_output_port('output').set_data(self.get_input_port('input').get_data())
