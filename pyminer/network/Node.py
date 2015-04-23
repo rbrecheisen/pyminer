@@ -17,6 +17,7 @@ class Node(object):
         self._input_ports = dict()
         self._output_ports = dict()
         self._configuration = Configuration()
+        self._required_config_items = list()
 
     def get_name(self):
         """
@@ -79,6 +80,34 @@ class Node(object):
         :return: Configuration
         """
         return self._configuration
+
+    def get_required_config_items(self):
+        """
+        Returns required configuration items.
+        :return: Configuration items
+        """
+        return self._required_config_items
+
+    def set_required_config_items(self, items):
+        """
+        Adds list required configuration items which the node needs
+        to execute. The node will check for these items before
+        running execute.
+        :param keys: List of mandatory configuration items
+        :return:
+        """
+        self._required_config_items = items
+
+    def check_config(self):
+        """
+        Checks whether configuration contains all the required
+        items. Any other items are optional.
+        :return:
+        """
+        for item in self.get_required_config_items():
+            value = self.get_config().get(item)
+            if value is None:
+                raise RuntimeError('Missing required configuration item \'' + item + '\'')
 
     def execute(self):
         """
