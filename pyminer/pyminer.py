@@ -1,25 +1,29 @@
 __author__ = 'Ralph'
 
-from network.ImportCsvNode import ImportCsvNode
+from network.ImportCSVNode import ImportCSVNode
 from network.FilterExamplesNode import FilterExamplesNode
-from network.ExportCsvNode import ExportCsvNode
+from network.ExportCSVNode import ExportCSVNode
 from network.Connection import Connection
 
 from ui.Application import Application
+
+
+def get_data_root():
+    return '../tests/data/'
 
 
 if __name__ == '__main__':
 
     # Create nodes
 
-    node1 = ImportCsvNode()
+    node1 = ImportCSVNode()
     node2 = FilterExamplesNode()
-    node3 = ExportCsvNode()
+    node3 = ExportCSVNode()
 
     # Configure nodes
 
-    node1.get_config().add('file_name', 'file.csv')
-    node3.get_config().add('file_name', 'file_new.csv')
+    node1.get_config().add('file_name', get_data_root() + 'file.csv')
+    node3.get_config().add('file_name', get_data_root() + 'file_new.csv')
 
     # Setup connections
 
