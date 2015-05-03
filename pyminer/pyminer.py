@@ -1,12 +1,11 @@
 __author__ = 'Ralph'
 
 from network.ImportCSVNode import ImportCSVNode
-from network.FilterExamplesNode import FilterExamplesNode
 from network.FilterAttributesNode import FilterAttributesNode
 from network.ExportCSVNode import ExportCSVNode
 from network.Connection import Connection
 
-from ui.Application import Application
+# from ui.Application import Application
 
 
 def get_data_root():

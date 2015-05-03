@@ -44,6 +44,8 @@ class FilterAttributesNode(Node):
 
         # Get input data frame
         data = self.get_input_port('input').get_data()
+        if data is None:
+            return
 
         # Process data depending on selected filter type
         if filter_type == 'all':

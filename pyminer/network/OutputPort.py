@@ -32,5 +32,5 @@ class OutputPort(Port):
         """
         self._data = data
         connection = self.get_connection()
-        if not connection is None:
+        if connection is not None:
             connection.get_target().get_node().execute()
