@@ -75,10 +75,6 @@ class Config(object):
         raise TypeError('Parameter \'identifiers\' must be of string or list type')
 
     def to_string(self):
-        """
-        Returns string representation of the configuration and its contents
-        :return: Configuration contents
-        """
         content = ''
         for key in sorted(self._config.keys()):
             content += key + ' = ' + self._config[key] + '\n'
