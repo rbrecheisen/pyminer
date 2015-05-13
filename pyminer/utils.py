@@ -74,6 +74,9 @@ class Config(object):
         # If neither a string nor list was provided raise exception
         raise TypeError('Parameter \'identifiers\' must be of string or list type')
 
+    def set(self, key, value):
+        self._config[key] = value
+
     def to_string(self):
         content = ''
         for key in sorted(self._config.keys()):
