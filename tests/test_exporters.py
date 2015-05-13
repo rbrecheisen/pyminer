@@ -1,7 +1,6 @@
 import unittest
 
-
-class TestPyminer(unittest.TestCase):
+class TestExporters(unittest.TestCase):
 
     def setUp(self):
         pass

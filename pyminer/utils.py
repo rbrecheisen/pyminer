@@ -56,6 +56,13 @@ class Config(object):
             value = self._config[key]
             parts = value.split(',')
             parts = [part.strip() for part in parts]
+            try:
+                # Try to convert to float. If this works, return
+                # a list of floats. Otherwise, return list of strings
+                float(parts[0])
+                return [float(part) for part in parts]
+            except ValueError:
+                pass
             return parts
         except KeyError:
             return None
@@ -75,6 +82,13 @@ class Config(object):
         raise TypeError('Parameter \'identifiers\' must be of string or list type')
 
     def set(self, key, value):
+        if type(value) is bool:
+            value = str(value).upper()
+        elif type(value) is list:
+            value = [str(v) for v in value]
+            value = ','.join(value)
+        else:
+            value = str(value)
         self._config[key] = value
 
     def to_string(self):

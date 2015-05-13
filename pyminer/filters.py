@@ -17,11 +17,21 @@ class FilterNode(Node):
             OutputPort(name='output', data_type=pd.DataFrame))
         self.add_output_port(
             OutputPort(name='original', data_type=pd.DataFrame))
+
+    def execute(self):
+        raise RuntimeError('Not implemented')
+
+
+class FilterAttributesNode(FilterNode):
+
+    def __init__(self):
+        super(FilterAttributesNode, self).__init__('FilterAttributes')
         self.set_required_config_items(['filter_type'])
         self._filter_types = [
             'all', 'single', 'subset']
 
     def execute(self):
+
         self.check_config()
 
         filter_type = self.get_config().get('filter_type')
@@ -36,30 +46,33 @@ class FilterNode(Node):
 
         if filter_type == 'all':
             if invert_filter:
-                pass
+                self.get_output_port('output').set_data(data)
             else:
-                pass
+                self.get_output_port('output').set_data(None)
+
         elif filter_type == 'single':
+            attribute = self.get_config().get('filter_type.single')
+            if attribute is None:
+                raise RuntimeError('Required filter option filter_type.single is missing')
             if invert_filter:
-                pass
+                data_new = data[[attribute]]
+                self.get_output_port('output').set_data(data_new)
             else:
-                pass
+                data_new = data.drop(attribute, axis=1, inplace=False)
+                self.get_output_port('output').set_data(data_new)
+
         elif filter_type == 'subset':
+            attributes = self.get_config().get_list('filter_type.subset')
+            if attributes is None:
+                raise RuntimeError('Required filter option filter_type.subset is missing')
             if invert_filter:
-                pass
+                data_new = data[attributes]
+                self.get_output_port('output').set_data(data_new)
             else:
-                pass
+                data_new = data.drop(attributes, axis=1, inplace=False)
+                self.get_output_port('output').set_data(data_new)
         else:
             print('ERROR: unknown filter type ' + filter_type)
-
-
-class FilterAttributesNode(FilterNode):
-
-    def __init__(self):
-        super(FilterAttributesNode, self).__init__('FilterAttributes')
-
-    def execute(self):
-        pass
 
 
 class FilterExamplesNode(FilterNode):

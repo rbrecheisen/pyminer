@@ -1,16 +1,10 @@
 __author__ = 'Ralph'
 
-# from network.ImportCSVNode import ImportCSVNode
-# from network.FilterAttributesNode import FilterAttributesNode
-# from network.ExportCSVNode import ExportCSVNode
-# from network.Connection import Connection
-
 # from ui.Application import Application
 
 from base import Connection
-
-from io import ImportCSVNode
-from io import ExportCSVNode
+from importers import ImportCSVNode
+from exporters import ExportCSVNode
 from filters import FilterAttributesNode
 
 
@@ -25,7 +19,9 @@ if __name__ == '__main__':
     node3 = ExportCSVNode()
 
     node1.get_config().set('file_name', get_data_root() + 'file.csv')
-    node2.get_config().set('filter_type', 'all')
+    node2.get_config().set('filter_type', 'subset')
+    node2.get_config().set('filter_type.subset', ['id', 'name'])
+    node2.get_config().set('invert_filter', True)
     node3.get_config().set('file_name', get_data_root() + 'file_new.csv')
 
     connection1 = Connection(

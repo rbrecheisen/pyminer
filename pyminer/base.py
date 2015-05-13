@@ -104,9 +104,16 @@ class OutputPort(Port):
 
     def __init__(self, name, data_type):
         super(OutputPort, self).__init__(name, data_type)
+        self._data = None
 
     def get_data(self):
-        return None
+        return self._data
+
+    def set_data(self, data):
+        self._data = data
+        connection = self.get_connection()
+        if connection is not None:
+            connection.get_target().get_node().execute()
 
 
 class Connection(object):
