@@ -2,6 +2,8 @@ __author__ = 'Ralph'
 
 import pandas as pd
 
+from arff_utils import ARFF
+
 from base import Node
 from base import InputPort
 from base import OutputPort
@@ -78,7 +80,50 @@ class FilterAttributesNode(FilterNode):
 class FilterExamplesNode(FilterNode):
 
     def __init__(self):
+
         super(FilterExamplesNode, self).__init__('FilterExamples')
+        self.add_input_port(
+            InputPort(name='input', data_type=pd.DataFrame))
+        self.add_output_port(
+            OutputPort(name='output', data_type=pd.DataFrame))
+        self.set_required_config_items(['filter_type'])
+        self._filter_types = ['all']
 
     def execute(self):
-        pass
+
+        self.check_config()
+
+        # For now, pass data unchanged to output
+        data = self.get_input_port('input').get_data()
+        self.get_output_port('output').set_data(data)
+
+
+class ScriptNode(FilterNode):
+
+    def __init__(self):
+
+        super(ScriptNode, self).__init__('Script')
+        self.add_input_port(
+            InputPort(name='input', data_type=pd.DataFrame))
+        self.add_output_port(
+            OutputPort(name='output', data_type=pd.DataFrame))
+        self.set_required_config_items(['text'])
+        self.get_config().set('text', self._get_template_text())
+
+    def execute(self):
+
+        self.check_config()
+
+        # Get data frame from input port
+        data = self.get_input_port('input').get_data()
+        if data is None:
+            return
+
+        # Save data frame to file so we can load it in the script
+        # file and work on it.
+        data.to_csv('tmp.csv')
+
+        # And now what?
+
+    def _get_template_text(self):
+        return ''

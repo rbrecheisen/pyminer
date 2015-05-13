@@ -19,7 +19,6 @@ class NodeCanvas(wx.Panel):
 
         self.Bind(wx.EVT_PAINT, self._on_paint)
         self.Bind(wx.EVT_RIGHT_UP, self._on_right_click)
-
         self._nodes = []
 
     def create_node(self):
