@@ -1,11 +1,13 @@
 __author__ = 'Ralph'
 
-from network.ImportCSVNode import ImportCSVNode
-from network.FilterAttributesNode import FilterAttributesNode
-from network.ExportCSVNode import ExportCSVNode
-from network.Connection import Connection
+# from network.ImportCSVNode import ImportCSVNode
+# from network.FilterAttributesNode import FilterAttributesNode
+# from network.ExportCSVNode import ExportCSVNode
+# from network.Connection import Connection
 
-from ui.Application import Application
+# from ui.Application import Application
+
+from base import Connection
 
 from io import ImportCSVNode
 from io import ExportCSVNode
