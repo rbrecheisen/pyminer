@@ -6,6 +6,10 @@ from base import Node
 from base import InputPort
 
 
+class Exporter(Node):
+    pass
+
+
 class ExportNode(Node):
 
     def __init__(self, name):

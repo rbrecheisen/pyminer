@@ -7,7 +7,7 @@ from importers import ImportCSVNode
 from exporters import ExportCSVNode
 from filters import FilterAttributesNode
 
-from ui import Application
+# from ui import Application
 
 
 def get_data_root():
@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     node1.execute()
 
-    # Run application
-
-    application = Application()
-    application.run()
+    # # Run application
+    #
+    # application = Application()
+    # application.run()
