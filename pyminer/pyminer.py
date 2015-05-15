@@ -3,11 +3,9 @@ __author__ = 'Ralph'
 # from ui.Application import Application
 
 from base import Connection
-from importers import ImportCSVNode
+from importers import ImportCSV
 from exporters import ExportCSVNode
 from filters import FilterAttributesNode
-
-# from ui import Application
 
 
 def get_data_root():
@@ -16,7 +14,7 @@ def get_data_root():
 
 if __name__ == '__main__':
 
-    node1 = ImportCSVNode()
+    node1 = ImportCSV()
     node2 = FilterAttributesNode()
     node3 = ExportCSVNode()
 
@@ -32,8 +30,3 @@ if __name__ == '__main__':
         node2.get_output_port('output'), node3.get_input_port('input'))
 
     node1.execute()
-
-    # # Run application
-    #
-    # application = Application()
-    # application.run()
