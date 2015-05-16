@@ -35,7 +35,7 @@ class ExportARFF(Exporter):
         file_name = self.get_config().get('file_name')
         data = self.get_input_port('input').get_data()
         if data is not None:
-            ARFF.write(file_name, ARFF.from_data_frame('', None, data))
+            ARFF.write(file_name, ARFF.from_data_frame('output', data))
 
 
 class ExportCSV(Exporter):
