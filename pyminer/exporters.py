@@ -11,7 +11,9 @@ from base import InputPort
 
 
 class Exporter(Node):
-
+    """
+    Exports Pandas data frame to various output formats.
+    """
     def __init__(self, name):
 
         super(Exporter, self).__init__(name)

@@ -8,7 +8,19 @@ from base import OutputPort
 
 
 class Filter(Node):
-    pass
+    """
+    Filter examples based on various criteria.
+    """
+    def __init__(self, name):
+
+        super(Filter, self).__init__(name)
+        self.add_input_port(
+            InputPort(name='input', data_type=pd.DataFrame))
+        self.add_output_port(
+            OutputPort(name='output', data_type=pd.DataFrame))
+
+    def execute(self):
+        raise RuntimeError('Not implemented')
 
 
 class RemoveDuplicates(Filter):

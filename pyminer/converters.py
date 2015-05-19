@@ -4,6 +4,9 @@ from base import Node
 
 
 class Converter(Node):
+    """
+    Converts features values from one format to another.
+    """
     pass
 
 

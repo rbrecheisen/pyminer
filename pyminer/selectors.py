@@ -4,6 +4,9 @@ from base import Node
 
 
 class Selector(Node):
+    """
+    Select or remove attributes based on various criteria.
+    """
     pass
 
 
