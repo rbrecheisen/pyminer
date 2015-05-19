@@ -14,10 +14,6 @@ class Importer(Node):
 
         super(Importer, self).__init__(name)
 
-    def execute(self):
-
-        raise RuntimeError('Not implemented')
-
 
 class ImportARFF(Importer):
 

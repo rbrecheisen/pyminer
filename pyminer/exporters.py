@@ -16,10 +16,6 @@ class Exporter(Node):
 
         super(Exporter, self).__init__(name)
 
-    def execute(self):
-
-        raise RuntimeError('Not implemented')
-
 
 class ExportARFF(Exporter):
 

@@ -4,7 +4,6 @@ __author__ = 'Ralph'
 
 from base import Connection
 from importers import ImportCSV
-from exporters import ExportCSVNode
 from filters import FilterAttributesNode
 
 
