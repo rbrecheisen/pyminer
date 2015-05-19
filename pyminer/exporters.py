@@ -7,20 +7,12 @@ from arff_utils import ARFF
 from base import Node
 from base import InputPort
 
-# TODO: update ARFF.from_data_frame() to automatically detect attributes and types
-
 
 class Exporter(Node):
-    """
-    Exports Pandas data frame to various output formats.
-    """
+
     def __init__(self, name):
 
         super(Exporter, self).__init__(name)
-
-    def execute(self):
-
-        raise RuntimeError('Not implemented')
 
 
 class ExportARFF(Exporter):

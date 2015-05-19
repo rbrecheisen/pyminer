@@ -9,16 +9,10 @@ from base import OutputPort
 
 
 class Importer(Node):
-    """
-    Imports various data formats.
-    """
+
     def __init__(self, name):
 
         super(Importer, self).__init__(name)
-
-    def execute(self):
-
-        raise RuntimeError('Not implemented')
 
 
 class ImportARFF(Importer):

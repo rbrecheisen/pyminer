@@ -1,5 +1,8 @@
 __author__ = 'Ralph'
 
+import time
+import datetime
+
 
 class Config(object):
 
@@ -96,3 +99,76 @@ class Config(object):
         for key in sorted(self._config.keys()):
             content += key + ' = ' + self._config[key] + '\n'
         return content
+
+
+class Log(object):
+
+    log_file = None
+    log_to_std_out = True
+
+    @staticmethod
+    def set_log_file(file_name):
+        Log.log_file = open(file_name, 'w')
+
+    @staticmethod
+    def set_log_to_std_out(log_to_std_out):
+        Log.log_to_std_out = log_to_std_out
+
+    @staticmethod
+    def info(message):
+        now = Timing.get_now_as_string()
+        if Log.log_to_std_out:
+            print(now + ' INFO: ' + message)
+        Log.log_file.write(now + ' INFO: ' + message + '\n')
+
+    @staticmethod
+    def warning(message):
+        now = Timing.get_now_as_string()
+        if Log.log_to_std_out:
+            print(now + ' WARNING: ' + message)
+        Log.log_file.write(now + ' WARNING: ' + message + '\n')
+
+    @staticmethod
+    def error(message):
+        now = Timing.get_now_as_string()
+        if Log.log_to_std_out:
+            print(now + ' ERROR: ' + message)
+        Log.log_file.write(now + ' ERROR: ' + message + '\n')
+
+
+class Timing(object):
+
+    @staticmethod
+    def get_now():
+        """
+        Returns current time
+        :return: Time
+        """
+        return time.time()
+
+    @staticmethod
+    def get_now_as_string():
+        """
+        Returns current time in string format.
+        :return: Time as string
+        """
+        t = time.time()
+        return datetime.datetime.fromtimestamp(t).strftime('%Y-%m-%d %H:%M:%S')
+
+    @staticmethod
+    def get_elapsed(start_time):
+        """
+        Calculates hours, minutes and seconds elapsed between
+        start time and now.
+        :param start_time: Start time
+        :return: Elapsed time
+        """
+        elapsed = Timing.get_now() - start_time
+        nr_hours = int(elapsed / 3600)
+        nr_minutes = int((elapsed - nr_hours * 3600) / 60)
+        nr_seconds = int((elapsed - nr_hours * 3600 - nr_minutes * 60))
+        nr_hours = '0' + str(nr_hours) if nr_hours < 10 else str(nr_hours)
+        nr_minutes = '0' + str(nr_minutes) if nr_minutes < 10 else str(nr_minutes)
+        nr_seconds = '0' + str(nr_seconds) if nr_seconds < 10 else str(nr_seconds)
+
+        return nr_hours, nr_minutes, nr_seconds
