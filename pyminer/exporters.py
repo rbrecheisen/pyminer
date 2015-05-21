@@ -7,8 +7,6 @@ from arff_utils import ARFF
 from base import Node
 from base import InputPort
 
-# TODO: update ARFF.from_data_frame() to automatically detect attributes and types
-
 
 class Exporter(Node):
 

@@ -17,6 +17,9 @@ class Filter(Node):
         self.add_output_port(
             OutputPort(name='output', data_type=pd.DataFrame))
 
+    def execute(self):
+        raise RuntimeError('Not implemented')
+
 
 class FilterExamples(Filter):
 

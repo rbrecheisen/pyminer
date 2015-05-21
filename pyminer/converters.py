@@ -1,37 +1,106 @@
 __author__ = 'Ralph'
 
+import pandas as pd
+
 from base import Node
+from base import InputPort
+from base import OutputPort
 
 
 class Converter(Node):
-    pass
+
+    def __init__(self, name):
+
+        super(Converter, self).__init__(name)
+        self.add_input_port(
+            InputPort(name='input', data_type=pd.DataFrame))
+        self.add_output_port(
+            OutputPort(name='output', data_type=pd.DataFrame))
+        self.set_required_config_items(['attributes'])
 
 
 class NumericalToBinominal(Converter):
-    pass
+
+    def __init__(self):
+
+        super(NumericalToBinominal, self).__init__('NumericalToBinominal')
+
+    def execute(self):
+
+        self.check_config()
+        data = self.get_input_port('input').get_data()
+        if data is None:
+            return
+
+        attributes = self.get_config().get_list('attributes')
+        for attribute in attributes:
+            column = data[attribute]
+            if column.nunique() != 2:
+                print('WARNING: attribute ' + attribute + ' has more than 2 values')
+                continue
+
+            # todo: continue here
 
 
-class NominalToBinominal(Converter):
-    pass
+class BinominalToNumerical(Converter):
+
+    def __init__(self):
+
+        super(BinominalToNumerical, self).__init__('BinominalToNumerical')
+
+    def execute(self):
+
+        self.check_config()
+        data = self.get_input_port('input').get_data()
+        if data is None:
+            return
+
+        attributes = self.get_config().get_list('attributes')
+        for attribute in attributes:
+            if data[attribute].nunique() != 2:
+                raise RuntimeError('Attribute is not binominal')
+            data[attribute] = pd.Categorical(data[attribute]).codes
+
+        self.get_output_port('output').set_data(data)
 
 
-class GuessTypes(Converter):
-    pass
+class NumericalToNominal(Converter):
 
+    def __init__(self):
 
-class NumericalToPolynominal(Converter):
-    pass
+        super(NumericalToNominal, self).__init__('NumericalToNominal')
+
+    def execute(self):
+
+        self.check_config()
+        data = self.get_input_port('input').get_data()
+        if data is None:
+            return
+
+        attributes = self.get_config().get_list('attributes')
 
 
 class NominalToNumerical(Converter):
-    pass
+
+    def __init__(self):
+
+        super(NominalToNumerical, self).__init__('NominalToNumerical')
+
+    def execute(self):
+
+        self.check_config()
+        data = self.get_input_port('input').get_data()
+        if data is None:
+            return
+
+        attributes = self.get_config().get_list('attributes')
 
 
 class TextToNominal(Converter):
     pass
 
 
-class NumericalToReal(Converter):
+class NominalToText(Converter):
     pass
 
 
@@ -43,7 +112,7 @@ class RealToInteger(Converter):
     pass
 
 
-class NominalToText(Converter):
+class IntegerToReal(Converter):
     pass
 
 
@@ -68,4 +137,8 @@ class DiscretizeByEntropy(Converter):
 
 
 class DiscretizeByUserSpecification(Converter):
+    pass
+
+
+class GuessTypes(Converter):
     pass
