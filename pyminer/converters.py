@@ -35,7 +35,7 @@ class NumericalToBinominal(Converter):
         attributes = self.get_config().get_list('attributes')
         for attribute in attributes:
             column = data[attribute]
-            if len(column.unique()) != 2:
+            if column.nunique() != 2:
                 print('WARNING: attribute ' + attribute + ' has more than 2 values')
                 continue
 
@@ -56,6 +56,12 @@ class BinominalToNumerical(Converter):
             return
 
         attributes = self.get_config().get_list('attributes')
+        for attribute in attributes:
+            if data[attribute].nunique() != 2:
+                raise RuntimeError('Attribute is not binominal')
+            data[attribute] = pd.Categorical(data[attribute]).codes
+
+        self.get_output_port('output').set_data(data)
 
 
 class NumericalToNominal(Converter):
