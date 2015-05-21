@@ -52,3 +52,13 @@ class GaussianProcesses(Classifier):
 
     def execute(self):
         pass
+
+
+class RandomForests(Classifier):
+
+    def __init__(self):
+
+        super(RandomForests, self).__init__('RandomForests')
+
+    def execute(self):
+        pass
