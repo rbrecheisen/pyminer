@@ -2,7 +2,7 @@ __author__ = 'Ralph'
 
 import wx
 
-from importers import ImportCSVNode
+from pyminer.network.importers import ImportCSVNode
 from exporters import ExportCSVNode
 from filters import FilterAttributesNode
 

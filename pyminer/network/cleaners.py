@@ -1,6 +1,6 @@
 __author__ = 'Ralph'
 
-from base import Node
+from pyminer.network.base import Node
 
 
 class Cleaner(Node):

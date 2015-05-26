@@ -79,7 +79,6 @@ class Port(object):
         self._name = name
         self._data_type = data_type
         self._node = None
-        self._connection = None
         self._description = ''
 
     def get_name(self):
@@ -97,14 +96,6 @@ class Port(object):
     def set_node(self, node):
 
         self._node = node
-
-    def get_connection(self):
-
-        return self._connection
-
-    def set_connection(self, connection):
-
-        self._connection = connection
 
     def get_data_type(self):
 
@@ -128,6 +119,15 @@ class InputPort(Port):
     def __init__(self, name, data_type):
 
         super(InputPort, self).__init__(name, data_type)
+        self._connection = None
+
+    def get_connection(self):
+
+        return self._connection
+
+    def set_connection(self, connection):
+
+        self._connection = connection
 
     def get_data(self):
 
@@ -142,7 +142,16 @@ class OutputPort(Port):
     def __init__(self, name, data_type):
 
         super(OutputPort, self).__init__(name, data_type)
+        self._connections = []
         self._data = None
+
+    def add_connection(self, connection):
+
+        self._connections.append(connection)
+
+    def get_connections(self):
+
+        return self._connections
 
     def get_data(self):
 
@@ -151,9 +160,9 @@ class OutputPort(Port):
     def set_data(self, data):
 
         self._data = data
-        connection = self.get_connection()
-        if connection is not None:
-            connection.get_target().get_node().execute()
+        for connection in self.get_connections():
+            if connection is not None:
+                connection.get_target().get_node().execute()
 
 
 class Connection(object):
@@ -166,8 +175,9 @@ class Connection(object):
             raise RuntimeError('Target must be of type InputPort')
         if not source.get_data_type() is target.get_data_type():
             raise RuntimeError('Source and target data types must be the same')
+
         self._source = source
-        self._source.set_connection(self)
+        self._source.add_connection(self)
         self._target = target
         self._target.set_connection(self)
 
