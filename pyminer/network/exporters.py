@@ -1,10 +1,11 @@
 __author__ = 'Ralph'
 
 import pandas as pd
+
 from arff_utils import ARFF
 
-from pyminer.network.base import Node
-from pyminer.network.base import InputPort
+from base import Node
+from base import InputPort
 
 
 class Exporter(Node):

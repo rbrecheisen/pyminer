@@ -2,9 +2,9 @@ __author__ = 'Ralph'
 
 import pandas as pd
 
-from pyminer.network.base import Node
-from pyminer.network.base import InputPort
-from pyminer.network.base import OutputPort
+from base import Node
+from base import InputPort
+from base import OutputPort
 
 
 class Selector(Node):

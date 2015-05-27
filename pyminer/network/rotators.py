@@ -1,6 +1,6 @@
 __author__ = 'Ralph'
 
-from pyminer.network.base import Node
+from base import Node
 
 
 class Rotator(Node):

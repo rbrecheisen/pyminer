@@ -4,6 +4,7 @@ import os
 
 import numpy as np
 import pandas as pd
+
 from sklearn.svm import SVC
 from sklearn.grid_search import GridSearchCV
 from sklearn.cross_validation import StratifiedKFold
@@ -14,9 +15,9 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import confusion_matrix
 
-from pyminer.network.base import Node
-from pyminer.network.base import InputPort
-from pyminer.network.base import OutputPort
+from base import Node
+from base import InputPort
+from base import OutputPort
 
 
 class Classifier(Node):
@@ -202,12 +203,7 @@ class SupportVectorMachine(Classifier):
 
     @staticmethod
     def _get_param_grid(kernel):
-        """
-        Returns parameter grid for given classifier name, or None
-        if classifier is not supported.
-        :param kernel: Kernel type
-        :return: Parameters
-        """
+
         if kernel == 'linear':
             return [{
                 'C': [2**x for x in range(-5, 15, 2)],
@@ -221,16 +217,7 @@ class SupportVectorMachine(Classifier):
 
     @staticmethod
     def _calculate_score(perf_measure, y_true, y_pred):
-        """
-        Calculates score of performance measure using true and predicted labels.
-        Some scores, like accuracy, precision and recall are natively
-        supported by SciKit Learn. Others like sensitivity need to
-        manually calculated from the confusion matrix.
-        :param perf_measure: Performance measure
-        :param y_true: True labels
-        :param y_pred: Predicted labels
-        :return: Score
-        """
+
         if perf_measure == 'accuracy':
             return accuracy_score(y_true, y_pred)
 

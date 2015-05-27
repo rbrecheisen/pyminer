@@ -32,6 +32,10 @@ class Node(object):
 
         return self._input_ports[name]
 
+    def get_input_ports(self):
+
+        return self._input_ports.values()
+
     def add_output_port(self, port):
 
         if not isinstance(port, OutputPort):
@@ -42,6 +46,10 @@ class Node(object):
     def get_output_port(self, name):
 
         return self._output_ports[name]
+
+    def get_output_ports(self):
+
+        return self._output_ports.values()
 
     def get_config(self):
 
