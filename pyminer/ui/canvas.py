@@ -1,6 +1,7 @@
 __author__ = 'Ralph'
 
 import wx
+import network.base
 
 
 class Canvas(wx.Panel):
@@ -33,6 +34,11 @@ class Canvas(wx.Panel):
                 self._connections.remove(connection)
         self._nodes.remove(node)
         self.Refresh()
+
+    @staticmethod
+    def execute_node(node):
+
+        node.execute()
 
     def _render(self, e):
 
@@ -115,8 +121,13 @@ class Canvas(wx.Panel):
                 continue
         self.Refresh()
 
-    def _show_dialog(self):
-        pass
+    def _show_dialog(self, e):
+
+        position = e.GetPosition()
+        for node in self._nodes:
+            if node.contains(position):
+                node.get_widget().show()
+                break
 
 
 class CanvasMenu(wx.Menu):
@@ -277,6 +288,15 @@ class Node(object):
 
         self._dragging = dragging
 
+    def is_executable(self):
+
+        return len(self._input_ports) == 0
+
+    def execute(self):
+
+        if self.is_executable():
+            self.get_node().execute()
+
 
 class NodeMenu(wx.Menu):
 
@@ -285,13 +305,23 @@ class NodeMenu(wx.Menu):
         super(NodeMenu, self).__init__()
         self._canvas = canvas
         self._node = node
-        item = wx.MenuItem(self, wx.NewId(), 'Delete Node')
-        self.AppendItem(item)
-        self.Bind(wx.EVT_MENU, self._delete_node, item)
+
+        item1 = wx.MenuItem(self, wx.NewId(), 'Delete Node')
+        self.AppendItem(item1)
+        self.Bind(wx.EVT_MENU, self._delete_node, item1)
+
+        if self._node.is_executable():
+            item2 = wx.MenuItem(self, wx.NewId(), 'Execute')
+            self.AppendItem(item2)
+            self.Bind(wx.EVT_MENU, self._execute_node, item2)
 
     def _delete_node(self, e):
 
         self._canvas.delete_node(self._node)
+
+    def _execute_node(self, e):
+
+        self._canvas.execute_node(self._node)
 
 
 class Connection(object):
@@ -303,15 +333,14 @@ class Connection(object):
         self._target = None
         self._source_position = (0, 0)
         self._target_position = (0, 0)
+        self._connection = None
 
     def render(self, device):
 
         device.SetPen(wx.Pen(wx.BLACK))
-
         (x1, y1) = self._source_position
         if self.has_source():
             (x1, y1) = self.get_source().get_position()
-
         (x2, y2) = self._target_position
         if self.has_target():
             (x2, y2) = self.get_target().get_position()
@@ -326,6 +355,8 @@ class Connection(object):
 
         self._source = source
         self._source_position = source.get_position()
+        if self.has_target():
+            self._connection = network.base.Connection(self._source.get_port(), self._target.get_port())
 
     def set_source_position(self, position):
 
@@ -344,6 +375,8 @@ class Connection(object):
 
         self._target = target
         self._target_position = target.get_position()
+        if self.has_source():
+            self._connection = network.base.Connection(self._source.get_port(), self._target.get_port())
 
     def set_target_position(self, position):
 
@@ -361,7 +394,3 @@ class Connection(object):
         if self.has_target() and self.get_target().get_node() is node.get_node():
             return True
         return False
-
-
-class ConnectionMenu(object):
-    pass

@@ -17,6 +17,10 @@ class Widget(wx.Dialog):
         self._node = node
         self._name = name
 
+    def show(self):
+
+        self.Show()
+
     def get_node(self):
 
         return self._node
