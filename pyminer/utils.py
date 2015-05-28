@@ -94,6 +94,12 @@ class Config(object):
             value = str(value)
         self._config[key] = value
 
+    def get_number_of_items(self):
+        return len(self._config.keys())
+
+    def get_keys(self):
+        return self._config.keys()
+
     def to_string(self):
         content = ''
         for key in sorted(self._config.keys()):

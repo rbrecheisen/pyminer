@@ -23,16 +23,24 @@ class SelectAttributes(Selector):
     def __init__(self):
 
         super(SelectAttributes, self).__init__('SelectAttributes')
-        self.set_required_config_items(['selector_type'])
-        self._selector_types = ['all', 'single', 'subset']
+
+        # Set configuration items for this node
+        self.get_config().set('selector_type', None)
+        self.get_config().set('selector_types', ['all', 'single', 'subset'])
+        self.get_config().set('attributes', None)
+        self.get_config().set('invert_selector', False)
 
     def execute(self):
 
-        self.check_config()
+        selector_types = self.get_config().get_list('selector_types')
+        if selector_types is None:
+            raise RuntimeError('Selector types not available')
 
         selector_type = self.get_config().get('selector_type')
-        if selector_type not in self._selector_types:
-            raise RuntimeError('Unknown filter type ' + selector_type)
+        if selector_type is None:
+            raise RuntimeError('Selector type not specified')
+        if selector_type not in selector_types:
+            raise RuntimeError('Unknown selector type ' + selector_type)
 
         invert_selector = self.get_config().get_bool('invert_selector', False)
 
@@ -47,20 +55,24 @@ class SelectAttributes(Selector):
                 self.get_output_port('output').set_data(None)
 
         elif selector_type == 'single':
-            attribute = self.get_config().get_list('attributes')[0]
-            if attribute is None:
+            attributes = self.get_config().get_list('attributes')
+            if attributes is None:
                 raise RuntimeError('Parameter \'attributes\' is missing')
+            if len(attributes) == 0:
+                raise RuntimeError('Attribute list is empty')
             if invert_selector:
-                data_new = data[[attribute]]
+                data_new = data[[attributes[0]]]
                 self.get_output_port('output').set_data(data_new)
             else:
-                data_new = data.drop(attribute, axis=1, inplace=False)
+                data_new = data.drop(attributes[0], axis=1, inplace=False)
                 self.get_output_port('output').set_data(data_new)
 
         elif selector_type == 'subset':
             attributes = self.get_config().get_list('attributes')
             if attributes is None:
                 raise RuntimeError('Parameter \'attributes\' is missing')
+            if len(attributes) == 0:
+                raise RuntimeError('Attribute list is empty')
             if invert_selector:
                 data_new = data[attributes]
                 self.get_output_port('output').set_data(data_new)
@@ -68,7 +80,7 @@ class SelectAttributes(Selector):
                 data_new = data.drop(attributes, axis=1, inplace=False)
                 self.get_output_port('output').set_data(data_new)
         else:
-            print('ERROR: unknown selector type ' + selector_type)
+            raise RuntimeError('ERROR: unknown selector type ' + selector_type)
 
 
 class RemoveUselessAttributes(Selector):

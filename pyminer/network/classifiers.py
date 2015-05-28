@@ -38,21 +38,34 @@ class SupportVectorMachine(Classifier):
     def __init__(self):
 
         super(SupportVectorMachine, self).__init__('SupportVectorMachine')
-        self.set_required_config_items(['kernel_type', 'target'])
-        self._kernel_types = ['linear', 'rbf']
+
+        # Set configuration items
+        self.get_config().set('kernel_type', None)
+        self.get_config().set('kernel_types', ['linear', 'rbf'])
+        self.get_config().set('auto_detect', True)
+        self.get_config().set('target', None)
+        self.get_config().set('performance_measure', 'accuracy')
+        self.get_config().set('n_grid_folds', 5)
+        self.get_config().set('n_folds', 10)
+        self.get_config().set('C', 1.0)
+        self.get_config().set('gamma', 0.0)
+        self.get_config().set('model_output_dir', None)
 
     def execute(self):
-
-        self.check_config()
 
         # Get data from input port
         data = self.get_input_port('input').get_data()
         if data is None:
             return
 
+        # Get kernel types
+        kernel_types = self.get_config().get_list('kernel_types')
+        if kernel_types is None:
+            raise RuntimeError('Kernel types not available')
+
         # Get SVM kernel type. Only 'linear' and 'rbf' are currently supported
         kernel_type = self.get_config().get('kernel_type')
-        if kernel_type not in self._kernel_types:
+        if kernel_type not in kernel_types:
             raise RuntimeError('Kernel type ' + kernel_type + ' not supported')
 
         # Check if hyper parameters should be auto-detected or not. For the

@@ -5,8 +5,14 @@ from ui.app import Application
 
 if __name__ == '__main__':
 
-    application = Application()
-    application.run()
+    from ui.app import Example
+    import wx
+    app = wx.App()
+    Example(None, title='Example')
+    app.MainLoop()
+
+    # application = Application()
+    # application.run()
 
     # node1 = ImportARFF()
     # node2 = SelectAttributes()
